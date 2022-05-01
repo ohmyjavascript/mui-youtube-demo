@@ -1,70 +1,393 @@
-# Getting Started with Create React App
+## Explore React Material UI Library
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Installation 
 
-## Available Scripts
+```
+npx create-react-app mui-yt-demo
+npm install @mui/material @emotion/react @emotion/styled
+npm install @mui/icons-material
 
-In the project directory, you can run:
+In index.html , add styles 
 
-### `npm start`
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+npm start
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Create a `components` folder and a `Dummy.js` file
 
-### `npm test`
+Button reference : [here](https://mui.com/material-ui/react-button/)
+```
+import React from 'react';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+const Dummy = () => {
+  return (
+    <div>
+      <Stack spacing={2} direction="row">
+        <Button variant="text">Text</Button>
+        <Button variant="contained">Contained</Button>
+        <Button variant="outlined">Outlined</Button>
+      </Stack>
+    </div>
+  );
+}
+export default Dummy;
 
-### `npm run build`
+```
+In App.js, import and use the component 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+import './App.css';
+import Dummy from './components/Dummy';
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+function App() {
+  return (
+    <div >
+      <Dummy />
+    </div>
+  );
+}
 
-### `npm run eject`
+export default App;
+```
+The material UI bootstrapping should be done.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Every component comes from its own module / namespace and need to be imported separately. 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Go to API section, and check the available props 
+The docs are pretty good. We need to learn the art of navigating through the docs to get what we need. 
+Inspect and find out the classes attached to the DOM 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+If you get the hang of one component, then the pattern is pretty much the same. 
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+### Box and typography
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Box- is a wrapper component for CSS utility needs. 
+material ui exposes a bunch of system props that we can apply via a prop called `sx`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+https://mui.com/system/basics/
+https://mui.com/material-ui/react-box/
 
-### Code Splitting
+```
+import React from 'react';
+import Box from '@mui/material/Box';
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+const Dummy = () => {
+  return (
+    <Box
+      sx={{
+        m: 10, // values are multiples of 8
+        width: 300,
+        height: 300,
+        backgroundColor: '#000',
+        '&:hover': {
+          backgroundColor: '#bbbbbb'
+        },
+      }}
+    />
+  );
+}
+export default Dummy;
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
+### Typography
 
-### Making a Progressive Web App
+Reference: [here](https://mui.com/material-ui/react-typography/)
+```
+import React from 'react';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography'
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+const Dummy = () => {
+  return (
+    <Box sx={{ maxWidth: 500, m: 10, border: '1px solid black' }}>
+      <Typography variant="h2" component="h1" gutterBottom noWrap>
+        Heading which has a longer text that makes sure the same should be showing ellipsis 
+      </Typography>
+    </Box>
+  );
+}
+export default Dummy;
 
-### Advanced Configuration
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Container and CssBaseLine
 
-### Deployment
+Reference [here](https://mui.com/material-ui/react-container/)
+```
+import React from 'react';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+const Dummy = () => {
+  return (
+    <React.Fragment>
+      <CssBaseline />
+      <Container maxWidth="lg"> 
+        <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }} />
+      </Container>
+    </React.Fragment>
+  );
+}
+export default Dummy;
 
-### `npm run build` fails to minify
+```
+Use `fixed` if we need to switch the maxWidth to respective breakpoints.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+with css baseline, it adds certain set of default styles ( normalize.css / reset.css ). Check the body tag before and after.
+
+Default breakpoints [here](https://mui.com/material-ui/customization/breakpoints/#default-breakpoints)
+
+```
+xs, extra-small: 0px
+sm, small: 600px
+md, medium: 900px
+lg, large: 1200px
+xl, extra-large: 1536px
+```
+
+
+### Grids & Cards 
+
+component implements grid system with Flexbox under the hood.
+References [here](https://mui.com/material-ui/react-grid/)
+```
+import React from 'react';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+
+const photos = [
+  { id: 1, url: 'https://placeimg.com/640/480/animals', name: 'Animals', desc: 'description 1' },
+  { id: 2, url: 'https://placeimg.com/640/480/arch', name: 'Architecture', desc: 'description 2' },
+  { id: 3, url: 'https://placeimg.com/640/480/nature', name: 'Nature', desc: 'description 3' },
+  { id: 4, url: 'https://placeimg.com/640/480/people', name: 'People', desc: 'description 4' },
+  { id: 5, url: 'https://placeimg.com/640/480/tech', name: 'Tech', desc: 'description 5' }
+]
+
+const Dummy = () => {
+  return (
+    <Box>
+      <Grid container spacing={2}>
+        {
+          photos.map(photo => {
+            return (
+              <Grid key={photo.id} item xs={3}>
+                <Card>
+                  <CardMedia
+                    component="img"
+                    height="240"
+                    image={photo.url}
+                    alt={photo.name}
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      {photo.name}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {photo.desc}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            )
+          })
+        }
+      </Grid>
+    </Box>
+  );
+}
+export default Dummy;
+
+```
+
+
+
+to make it responsive
+
+```
+<Grid key={photo.id} item xs={6} sm={4} lg={3}>
+
+```
+
+Custom row and column spacing
+
+```
+<Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 4, lg: 8 }}>
+```
+
+
+### Stack 
+
+The Stack component manages layout of immediate children along the vertical or horizontal axis
+
+```
+import React from 'react';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+
+const Dummy = () => {
+  return (
+    <Box sx={{ ml: 5 }}>
+      <Stack
+        direction="row"
+        divider={<Divider orientation="vertical" flexItem />}
+        orientation="vertical"
+        spacing={2}>
+
+        <Button variant="text">Home</Button>
+        <Button variant="text">About</Button>
+        <Button variant="text">Contact</Button>
+
+      </Stack>
+    </Box>
+  );
+}
+export default Dummy;
+```
+
+### ImageList 
+References [here](https://mui.com/material-ui/react-image-list/)
+```
+import React from 'react';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+
+const itemData = [
+  {
+    img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
+    title: 'Breakfast',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
+    title: 'Burger',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
+    title: 'Camera',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
+    title: 'Coffee',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8',
+    title: 'Hats',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62',
+    title: 'Honey',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6',
+    title: 'Basketball',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f',
+    title: 'Fern',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1597645587822-e99fa5d45d25',
+    title: 'Mushrooms',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1567306301408-9b74779a11af',
+    title: 'Tomato basil',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1471357674240-e1a485acb3e1',
+    title: 'Sea star',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1589118949245-7d38baf380d6',
+    title: 'Bike',
+  },
+];
+
+
+const Dummy = () => {
+  return (
+    <ImageList sx={{ width: '100%', height: '530px' }}
+      cols={3} rowHeight={264}>
+      {itemData.map((item) => (
+        <ImageListItem key={item.img}>
+          <img
+            src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
+            alt={item.id}
+            loading="lazy"
+          />
+        </ImageListItem>
+      ))}
+    </ImageList>
+  );
+}
+export default Dummy;
+```
+As and when we scroll, images are loaded lazily 
+
+### Modal & Paper
+
+In Category.js 
+
+```
+import React from 'react';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import Button from '@mui/material/Button';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
+const Dummy = () => {
+  const [open, setOpen] = React.useState(false);
+  const openModal = () => setOpen(true);
+  const closeModal = () => setOpen(false);
+
+  return (
+    <Paper sx={{ minHeight: '200px', m: 5, pt: 5 }} elevation={7}>
+      <Button variant="contained"
+        onClick={openModal}> Open Modal </Button>
+      <Modal
+        open={open}
+        onClose={closeModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description">
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Are you sure?
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            You are about to delete the category
+          </Typography>
+        </Box>
+      </Modal>
+    </Paper>
+  );
+}
+export default Dummy;
+```
+### Theming 
+
+The app we have in this repo is the example of Theming with default dark/ light mode
