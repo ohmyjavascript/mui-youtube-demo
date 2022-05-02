@@ -391,3 +391,118 @@ export default Dummy;
 ### Theming 
 
 The app we have in this repo is the example of Theming with default dark/ light mode
+
+## To use custom material ui theme
+
+```
+import { deepOrange, deepPurple, amber, grey } from '@mui/material/colors';
+
+const getDesignTokens = (mode) => ({
+  palette: {
+    mode,
+    ...(mode === 'light'
+      ? {
+        // palette values for light mode
+        primary: deepOrange,
+        divider: deepOrange[200],
+        text: {
+          primary: grey[900],
+          secondary: amber[800],
+        },
+      }
+      : {
+        // palette values for dark mode
+        primary: deepPurple,
+        divider: deepPurple[700],
+        background: {
+          default: deepPurple[900],
+          paper: deepPurple[900],
+        },
+        text: {
+          primary: '#fff',
+          secondary: grey[500],
+        },
+      }),
+  },
+});
+
+const theme = createTheme(getDesignTokens(mode))
+
+```
+### Custom theme builder  
+
+```
+https://bareynol.github.io/mui-theme-creator/
+```
+
+### Customize components
+
+```
+components: {
+    MuiButton: {
+      defaultProps: {
+        disableRipple: true,
+      },
+    },
+    MuiListItemButton: {
+      defaultProps: {
+        disableRipple: true,
+      },
+    }
+  },
+
+```
+
+### Media Query
+
+```
+import useMediaQuery from '@mui/material/useMediaQuery';
+const matches = useMediaQuery('(max-width:699px)');
+
+{`${matches}` === 'true' && <MenuIcon />}
+```
+
+### Setting & Using custom theme variables 
+
+```
+const getDesignTokens = (mode) => ({
+  palette: {
+    mode,
+    ...(mode === 'light'
+      ? {
+        // palette values for light mode
+        primary: deepOrange,
+        divider: amber[200],
+        text: {
+          primary: grey[900],
+          secondary: grey[800],
+        },
+        background: {
+          custom: '#cccccc'
+        },
+      }
+      : {
+        // palette values for dark mode
+        primary: deepPurple,
+        divider: deepPurple[700],
+        background: {
+          default: deepPurple[900],
+          paper: deepPurple[900],
+          custom: '#b90b10'
+        },
+        text: {
+          primary: '#fff',
+          secondary: grey[500],
+        },
+      }),
+  },
+});
+```
+
+and within component, use the custom value
+
+```
+<Paper sx={{
+  backgroundColor: 'background.custom',
+}}
+```

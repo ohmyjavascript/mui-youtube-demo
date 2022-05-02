@@ -56,6 +56,7 @@ const Dummy = () => {
           <Grid sx={{ marginLeft: '300px', overflowY: 'auto' }} container item>
             <Paper sx={{
               minHeight: '200px', m: 2,
+              backgroundColor: 'background.custom',
               display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center'
             }} elevation={7}>
               <Typography variant="h5" component="p">
